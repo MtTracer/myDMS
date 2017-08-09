@@ -6,6 +6,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteSource;
@@ -23,7 +25,7 @@ public class FileReference {
   public static final Builder builderFrom(final FileReference data) {
     return builder().setId(data.id)
       .setName(data.name)
-      .setContents(data.contents)
+      .setContentsSource(data.contents)
       .setMeta(data.meta);
   }
 
@@ -34,13 +36,30 @@ public class FileReference {
     meta = builder.meta;
   }
 
+  @Nullable
+  public Long getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public ByteSource getContents() {
+    return contents;
+  }
+
+  public Map<String, String> getMeta() {
+    return meta;
+  }
+
   public static final class Builder {
     private Long id;
     private String name;
     private ByteSource contents;
     private Map<String, String> meta = ImmutableMap.of();
 
-    public Builder setId(final long id) {
+    public Builder setId(@Nullable final Long id) {
       this.id = id;
       return this;
     }
@@ -52,7 +71,7 @@ public class FileReference {
       return this;
     }
 
-    public Builder setContents(final ByteSource contents) {
+    public Builder setContentsSource(final ByteSource contents) {
       this.contents = checkNotNull(contents);
       return this;
     }
