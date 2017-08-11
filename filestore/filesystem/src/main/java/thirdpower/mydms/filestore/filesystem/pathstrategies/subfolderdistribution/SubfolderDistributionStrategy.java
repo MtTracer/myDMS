@@ -1,4 +1,4 @@
-package thirdpower.mydms.filestore.filesystem.pathstrategies;
+package thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -9,6 +9,8 @@ import javax.inject.Inject;
 
 import com.google.common.base.Splitter;
 import com.google.common.hash.HashFunction;
+
+import thirdpower.mydms.filestore.filesystem.pathstrategies.PathStrategy;
 
 public class SubfolderDistributionStrategy implements PathStrategy {
 
@@ -29,7 +31,7 @@ public class SubfolderDistributionStrategy implements PathStrategy {
   }
 
   private byte[] createHash(final long id, final String filename) {
-    final HashFunction hashFunction = config.getIdHashFunction();
+    final HashFunction hashFunction = config.getHashFunction();
     return hashFunction.newHasher()
       .putLong(id)
       .putString(filename, StandardCharsets.UTF_8)

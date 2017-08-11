@@ -1,15 +1,18 @@
-package thirdpower.mydms.filestore.filesystem.pathstrategies;
+package thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Test;
 
+import thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution.SubfolderDistributionConfiguration;
+import thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution.SubfolderDistributionStrategy;
+
 public class SubfolderDistributionStrategyTest {
 
   @Test
   public void testCreateDirectoryPath() throws Exception {
-    final SubfolderDistributionConfiguration config = new SubfolderDistributionConfiguration();
+    final SubfolderDistributionConfiguration config = SubfolderDistributionConfiguration.builder().build();
     final SubfolderDistributionStrategy strategy = new SubfolderDistributionStrategy(config);
 
     final Path root = Paths.get("c:", "someFolder", "myDMS", "datastore");
