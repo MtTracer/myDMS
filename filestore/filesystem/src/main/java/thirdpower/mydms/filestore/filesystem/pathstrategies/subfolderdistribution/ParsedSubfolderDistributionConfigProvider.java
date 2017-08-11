@@ -1,24 +1,29 @@
 package thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.json.JsonObject;
 
 import thirdpower.mydms.filestore.filesystem.FilesystemConfigJson;
 
-public class ParsedSubfolderDistributionConfigProvider implements Provider<SubfolderDistributionConfiguration> {
+public class ParsedSubfolderDistributionConfigProvider
+    implements Provider<SubfolderDistributionConfiguration> {
 
-	private ConfigParser parser;
-	private JsonObject filesystemConfig;
+  private final ConfigParser parser;
+  private final JsonObject filesystemConfig;
 
-	public ParsedSubfolderDistributionConfigProvider(ConfigParser parser,
-			@FilesystemConfigJson JsonObject filesystemConfig) {
-		this.parser = parser;
-		this.filesystemConfig = filesystemConfig;
-	}
+  @Inject
+  ParsedSubfolderDistributionConfigProvider(final ConfigParser parser,
+      @FilesystemConfigJson final JsonObject filesystemConfig) {
+    this.parser = checkNotNull(parser);
+    this.filesystemConfig = checkNotNull(filesystemConfig);
+  }
 
-	@Override
-	public SubfolderDistributionConfiguration get() {
-		return parser.parse(filesystemConfig);
-	}
+  @Override
+  public SubfolderDistributionConfiguration get() {
+    return parser.parse(filesystemConfig);
+  }
 
 }

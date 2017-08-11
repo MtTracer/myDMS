@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import javax.inject.Inject;
+
 import com.google.common.io.ByteSource;
 
 import thirdpower.mydms.filestore.api.FileReference;
@@ -21,6 +23,7 @@ public class FilesystemFileStoreService implements FileStoreService {
 
   private final FilesystemFileStoreConfiguration config;
 
+  @Inject
   FilesystemFileStoreService(final FilesystemFileStoreConfiguration config) {
     this.config = checkNotNull(config);
   }

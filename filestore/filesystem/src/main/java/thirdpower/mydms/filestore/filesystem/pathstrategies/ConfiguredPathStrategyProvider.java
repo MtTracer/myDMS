@@ -1,7 +1,10 @@
 package thirdpower.mydms.filestore.filesystem.pathstrategies;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.json.JsonObject;
 
@@ -10,20 +13,23 @@ import thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistributio
 
 public class ConfiguredPathStrategyProvider implements Provider<PathStrategy> {
 
-	private Map<String, Provider<PathStrategy>> pathStrategies;
-	private JsonObject filesystemConfig;
+  private final Map<String, Provider<PathStrategy>> pathStrategies;
+  private final JsonObject filesystemConfig;
 
-	ConfiguredPathStrategyProvider(Map<String, Provider<PathStrategy>> pathStrategies,
-			@FilesystemConfigJson JsonObject filesystemConfig) {
-		this.pathStrategies = pathStrategies;
-		this.filesystemConfig = filesystemConfig;
-	}
+  @Inject
+  ConfiguredPathStrategyProvider(final Map<String, Provider<PathStrategy>> pathStrategies,
+      @FilesystemConfigJson final JsonObject filesystemConfig) {
+    this.pathStrategies = checkNotNull(pathStrategies);
+    this.filesystemConfig = checkNotNull(filesystemConfig);
+  }
 
-	@Override
-	public PathStrategy get() {
-		String pathStrategyName = filesystemConfig.getString("pathStrategy", SubfolderDistributionModule.STRATEGY_NAME);
-		// TODO error if not found
-		return pathStrategies.get(pathStrategyName).get();
-	}
+  @Override
+  public PathStrategy get() {
+    final String pathStrategyName =
+        filesystemConfig.getString("pathStrategy", SubfolderDistributionModule.STRATEGY_NAME);
+    // TODO error if not found
+    return pathStrategies.get(pathStrategyName)
+      .get();
+  }
 
 }
