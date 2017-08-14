@@ -6,13 +6,14 @@
 
 	<parent>
 		<groupId>thirdpower.mydms</groupId>
-		<artifactId>mydms.inject</artifactId>
+		<artifactId>mydms.persistence</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mydms.inject.guice</artifactId>
-	<name>inject-guice</name>
+	<artifactId>mydms.persistence.h2embedded</artifactId>
+	<name>persistence-h2embedded</name>
 	<packaging>jar</packaging>
+
 
 	<dependencies>
 		<dependency>
@@ -20,20 +21,35 @@
 			<artifactId>mydms.inject.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
 			<artifactId>auto-service</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-persist</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava-testlib</artifactId>
-			<scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.config</artifactId>

@@ -6,20 +6,22 @@
 
 	<parent>
 		<groupId>thirdpower.mydms</groupId>
-		<artifactId>mydms.inject</artifactId>
+		<artifactId>mydms</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mydms.inject.api</artifactId>
-	<name>inject-api</name>
+	<artifactId>mydms.config</artifactId>
+	<name>config</name>
 	<packaging>jar</packaging>
-
 
 	<dependencies>
 		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.config</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.json</groupId>
+			<artifactId>javax.json-api</artifactId>
 		</dependency>
 	</dependencies>
 </project>

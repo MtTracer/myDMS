@@ -6,20 +6,14 @@
 
 	<parent>
 		<groupId>thirdpower.mydms</groupId>
-		<artifactId>mydms.inject</artifactId>
+		<artifactId>mydms.document</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mydms.inject.api</artifactId>
-	<name>inject-api</name>
+	<artifactId>mydms.document.impl</artifactId>
+	<name>document-impl</name>
 	<packaging>jar</packaging>
 
-
 	<dependencies>
-		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.config</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 </project>
