@@ -23,7 +23,7 @@ public class H2EmbeddedModule extends AbstractModule {
   protected void configure() {
     final Path dbPath = dbDirectoryPath.resolve(DB_NAME);
     final ImmutableMap<Object, Object> jpaProperties = ImmutableMap.<Object, Object>builder()
-      .put(EntityManagerProperties.JDBC_URL, "jdbc:h2:" + dbPath.toString())
+      .put(EntityManagerProperties.JDBC_URL, "jdbc:h2:" + dbPath.toAbsolutePath().toString())
       .build();
     install(new JpaPersistModule("h2embedded-dev").properties(jpaProperties));
 

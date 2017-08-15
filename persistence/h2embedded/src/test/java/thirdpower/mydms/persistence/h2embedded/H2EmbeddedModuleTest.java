@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.persist.PersistService;
 
 public class H2EmbeddedModuleTest {
 
@@ -16,6 +17,9 @@ public class H2EmbeddedModuleTest {
   public void testJpa() {
     final Path dbDirectoryPath = Paths.get("target", "h2db-test");
     final Injector injector = Guice.createInjector(new H2EmbeddedModule(dbDirectoryPath));
+    PersistService persistService = injector.getInstance(PersistService.class);
+    persistService.start();
+    
     final EntityManager em = injector.getInstance(EntityManager.class);
 
     final TestEntity testEntity = new TestEntity("huhu");
