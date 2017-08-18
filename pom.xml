@@ -130,9 +130,9 @@
 				<version>1.1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-jpa</artifactId>
-				<version>1.11.6.RELEASE</version>
+				<groupId>com.google.code.guice-repository</groupId>
+				<artifactId>guice-repository</artifactId>
+				<version>2.0.1</version>
 			</dependency>
 
 			<dependency>
@@ -148,6 +148,11 @@
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>com.floreysoft</groupId>
+				<artifactId>jmte</artifactId>
+				<version>3.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
