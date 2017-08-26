@@ -13,8 +13,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<servlet-api.version>4.0.0</servlet-api.version>
 		<guice.version>4.1.0</guice.version>
 		<guava.version>23.0</guava.version>
+		<jetty.version>9.4.6.v20170531</jetty.version>
 
 		<analyzeDependencies.failOnError>true</analyzeDependencies.failOnError>
 		<analyzeDependencies.skip>false</analyzeDependencies.skip>
@@ -26,6 +28,7 @@
 		<module>filestore</module>
 		<module>inject</module>
 		<module>persistence</module>
+		<module>jetty</module>
 	</modules>
 
 	<dependencies>
@@ -40,6 +43,12 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servlet-api.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
@@ -214,6 +223,12 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.20</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-maven-plugin</artifactId>
+					<version>${jetty.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
