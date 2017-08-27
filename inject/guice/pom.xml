@@ -18,7 +18,6 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.inject.api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.auto.service</groupId>
@@ -37,7 +36,6 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.config</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>

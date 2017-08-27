@@ -61,31 +61,73 @@
 			<version>${jetty.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>apache-jsp</artifactId>
+			<version>${jetty.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>apache-jstl</artifactId>
+			<version>${jetty.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.google.inject.extensions</groupId>
+			<artifactId>guice-servlet</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.document.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.inject.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
-	  <plugins>
-	    <plugin>
-	      <groupId>org.codehaus.mojo</groupId>
-	      <artifactId>exec-maven-plugin</artifactId>
-	      <version>1.6.0</version>
-	      <executions>
-	        <execution><goals><goal>java</goal></goals></execution>
-	      </executions>
-	      <configuration>
-	        <mainClass>thirdpower.mydms.jetty.JettyServer</mainClass>
-	      </configuration>
-	    </plugin>
-	  </plugins>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>thirdpower.mydms.jetty.JettyServer</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
-  
+
 </project>

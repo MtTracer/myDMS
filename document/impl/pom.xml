@@ -18,12 +18,10 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.document.api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.filestore.api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
@@ -37,6 +35,11 @@
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>

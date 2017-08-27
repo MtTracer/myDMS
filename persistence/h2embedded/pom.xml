@@ -19,7 +19,6 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.inject.api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
@@ -30,7 +29,6 @@
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -54,7 +52,6 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.config</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -63,11 +60,16 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.persistence.api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.floreysoft</groupId>
 			<artifactId>jmte</artifactId>
+		</dependency>
+		<dependency>
+			<!-- replace excluded asm from jmte -->
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>
@@ -89,4 +91,5 @@
 			<artifactId>javax.persistence</artifactId>
 		</dependency>
 	</dependencies>
+	
 </project>

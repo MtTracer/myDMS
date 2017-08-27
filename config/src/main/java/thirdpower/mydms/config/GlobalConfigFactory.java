@@ -20,10 +20,17 @@ public class GlobalConfigFactory {
 
   public static GlobalConfig load() {
     final Path configFilePath = getConfigFilePath();
+    final Path myDmsHome = configFilePath.getParent();
+    if (!configFilePath.toFile()
+      .isFile()) {
+      return parseConfig(myDmsHome, Json.createObjectBuilder()
+        .build());
+    }
     try (BufferedReader configReader = Files.newBufferedReader(configFilePath);
         JsonParser configParser = Json.createParser(configReader)) {
+      configParser.next();
       final JsonObject jsonConfig = configParser.getObject();
-      return parseConfig(configFilePath, jsonConfig);
+      return parseConfig(myDmsHome, jsonConfig);
     } catch (final Exception e) {
       // TODO handle error
       throw new Error("Could not read global config.", e);

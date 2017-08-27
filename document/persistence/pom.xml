@@ -22,7 +22,6 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.persistence.api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.auto.service</groupId>

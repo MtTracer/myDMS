@@ -4,7 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.nio.file.Path;
 
-import org.eclipse.persistence.config.EntityManagerProperties;
+import org.eclipse.persistence.config.PersistenceUnitProperties;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.AbstractModule;
@@ -23,7 +23,7 @@ public class H2EmbeddedModule extends AbstractModule {
   protected void configure() {
     final Path dbPath = dbDirectoryPath.resolve(DB_NAME);
     final ImmutableMap<Object, Object> jpaProperties = ImmutableMap.<Object, Object>builder()
-      .put(EntityManagerProperties.JDBC_URL, "jdbc:h2:" + dbPath.toAbsolutePath()
+      .put(PersistenceUnitProperties.JDBC_URL.intern(), "jdbc:h2:" + dbPath.toAbsolutePath()
         .toString())
       .build();
     install(new JpaPersistModule("h2embedded").properties(jpaProperties));

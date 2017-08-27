@@ -1,6 +1,10 @@
 package thirdpower.mydms.jetty;
 
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
@@ -14,6 +18,7 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 import com.google.common.io.Resources;
+import com.google.inject.servlet.GuiceFilter;
 
 public class JettyServer {
 
@@ -55,7 +60,17 @@ public class JettyServer {
   public void start() throws Exception {
     final Server server = new Server(startPort);
 
+    final WebAppContext context = createContext();
 
+    server.setHandler(context);
+
+    server.start();
+
+    server.join();
+
+  }
+
+  private WebAppContext createContext() throws URISyntaxException {
     final WebAppContext context = new WebAppContext();
     context.setContextPath("/");
     context.setDescriptor(WEBAPP_RESOURCES_LOCATION + "/WEB-INF/web.xml");
@@ -73,12 +88,18 @@ public class JettyServer {
     context.setResourceBase(webAppDir.toURI()
       .toString());
     context.setParentLoaderPriority(true);
+    context.getServletContext()
+      .setExtendedListenerTypes(true);
 
-    server.setHandler(context);
+    // guice
+    context.addEventListener(new GuiceListener());
+    context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
 
-    server.start();
+    context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
+        ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$");
 
-    server.join();
+    // context.addServlet(DefaultServlet.class, "/");
 
+    return context;
   }
 }
