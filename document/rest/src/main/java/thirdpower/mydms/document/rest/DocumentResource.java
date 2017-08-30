@@ -14,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.google.common.io.ByteSource;
@@ -21,6 +22,8 @@ import com.google.common.io.ByteSource;
 import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentService;
 import thirdpower.mydms.document.api.DocumentServiceException;
+import thirdpower.mydms.rest.api.CollectionWrapper;
+import thirdpower.mydms.rest.api.Meta;
 
 @Path("documents")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -61,9 +64,10 @@ public class DocumentResource {
   }
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public List<DocumentPojo> findAll() {
-    //TODO filter
-    return service.findAll(null).map(this::toPojo).collect(Collectors.toList());
+  public CollectionWrapper<DocumentPojo> findAll(@Context Meta meta) {
+    List<DocumentPojo> result = service.findAll(null).map(this::toPojo).collect(Collectors.toList());
+    meta.setTotalSize(result.size());
+    return CollectionWrapper.of(result, meta);
   }
   
   private DocumentPojo toPojo(Document document) {

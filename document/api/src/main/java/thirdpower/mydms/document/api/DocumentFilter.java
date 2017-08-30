@@ -9,6 +9,14 @@ public final class DocumentFilter {
   private final String name;
   private final NameFilterMode nameFilterMode;
 
+  public static Builder builder() {
+    return new Builder();
+  }
+  
+  public static Builder builderFrom(DocumentFilter data) {
+    return builder().withNameFilter(data.name, data.nameFilterMode);
+  }
+  
   private DocumentFilter(final Builder builder) {
     this.name = builder.name;
     this.nameFilterMode = builder.nameFilterMode;

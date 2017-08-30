@@ -55,5 +55,9 @@
 			<artifactId>auto-service</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.rest.api</artifactId>
+		</dependency>
 	</dependencies>
 </project>
