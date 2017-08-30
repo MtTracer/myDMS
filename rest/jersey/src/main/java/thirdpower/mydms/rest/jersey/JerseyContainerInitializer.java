@@ -20,7 +20,6 @@ public class JerseyContainerInitializer implements ServletContainerInitializer {
     servletConfig.setInitParameter("javax.ws.rs.Application", MyDmsJerseyConfig.class.getName());
     servletConfig.setLoadOnStartup(1);
     servletConfig.addMapping("/rest/*");
-
   }
 
 }

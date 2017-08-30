@@ -1,7 +1,7 @@
 package thirdpower.mydms.document.api;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import com.google.common.io.ByteSource;
 
@@ -9,7 +9,7 @@ public interface DocumentService {
 
   Optional<Document> find(long id);
 
-  List<Document> findAll(DocumentFilter filter);
+  Stream<Document> findAll(DocumentFilter filter);
 
   Optional<ByteSource> readContents(long id);
 

@@ -5,10 +5,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
 import com.google.common.io.ByteSource;
+import com.google.inject.persist.Transactional;
+import com.google.j2objc.annotations.LoopTranslation;
 
 import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentFilter;
@@ -34,16 +38,24 @@ class DefaultDocumentService implements DocumentService {
   @Override
   public Optional<Document> find(final long id) {
     final DocumentEntity entity = documentDAO.findById(id);
-    final Document document = new Document(id, entity.getName());
+    if(null==entity) {
+      return Optional.empty();
+    }
+    final Document document = fromEntity(entity);
     return Optional.of(document);
   }
 
-  @Override
-  public List<Document> findAll(final DocumentFilter filter) {
-    throw new UnsupportedOperationException("not implemented");
+  private Document fromEntity(final DocumentEntity entity) {
+    return new Document(entity.getId(), entity.getName());
   }
 
   @Override
+  public Stream<Document> findAll(final DocumentFilter filter) {
+    return documentDAO.findAll().stream().map(this::fromEntity);
+  }
+
+  @Override
+  @Transactional
   public boolean delete(final long id) throws DocumentServiceException {
     final DocumentEntity entity = documentDAO.findById(id);
     if (null == entity) {
@@ -73,6 +85,7 @@ class DefaultDocumentService implements DocumentService {
   }
 
   @Override
+  @Transactional
   public Document create(final Document document, final ByteSource contents)
       throws DocumentServiceException {
     DocumentEntity entity = new DocumentEntity();
@@ -85,7 +98,7 @@ class DefaultDocumentService implements DocumentService {
       throw new DocumentServiceException("Could not save document.", e);
     }
 
-    return new Document(entity.getId(), entity.getName());
+    return fromEntity(entity);
   }
 
   @Override
@@ -94,7 +107,7 @@ class DefaultDocumentService implements DocumentService {
     checkArgument(null != entity, "Can't find document with id %s for update.", document.getId());
     entity.setName(document.getName());
     entity = documentDAO.persist(entity);
-    return new Document(entity.getId(), entity.getName());
+    return fromEntity(entity);
   }
 
   @Override

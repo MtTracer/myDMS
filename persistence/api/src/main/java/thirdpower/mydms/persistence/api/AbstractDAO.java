@@ -1,14 +1,21 @@
 package thirdpower.mydms.persistence.api;
 
+import java.util.List;
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.google.common.reflect.TypeToken;
 
 
 public abstract class AbstractDAO<E, K> {
 
-  @PersistenceContext
+  @Inject
   private EntityManager entityManager;
 
   private final TypeToken<E> entityTypeToken = new TypeToken<E>(getClass()) {};
@@ -23,7 +30,20 @@ public abstract class AbstractDAO<E, K> {
   }
 
   public E findById(final K id) {
-    final Class<E> entityType = (Class<E>) entityTypeToken.getRawType();
-    return entityManager.find(entityType, id);
+    return entityManager.find(getEntityClass(), id);
+  }
+
+  @SuppressWarnings("unchecked")
+  private Class<E> getEntityClass() {
+    return (Class<E>) entityTypeToken.getRawType();
+  }
+  
+  public List<E> findAll() {
+    CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+    CriteriaQuery<E> cq = cb.createQuery(getEntityClass());
+    Root<E> rootEntry = cq.from(getEntityClass());
+    CriteriaQuery<E> all = cq.select(rootEntry);
+    TypedQuery<E> allQuery = entityManager.createQuery(all);
+    return allQuery.getResultList();
   }
 }

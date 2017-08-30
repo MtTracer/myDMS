@@ -29,8 +29,10 @@
 		<module>document</module>
 		<module>filestore</module>
 		<module>inject</module>
-		<module>persistence</module>
 		<module>jetty</module>
+		<module>persistence</module>
+		<module>rest</module>
+
 	</modules>
 
 	<dependencies>
@@ -219,6 +221,11 @@
 			<dependency>
 				<groupId>org.glassfish.jersey.containers</groupId>
 				<artifactId>jersey-container-servlet-core</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.media</groupId>
+				<artifactId>jersey-media-json-jackson</artifactId>
 				<version>${jersey.version}</version>
 			</dependency>
 		</dependencies>

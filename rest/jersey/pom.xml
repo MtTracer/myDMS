@@ -15,7 +15,7 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
@@ -27,6 +27,11 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>

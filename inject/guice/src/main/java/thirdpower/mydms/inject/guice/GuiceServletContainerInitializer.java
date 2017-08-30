@@ -18,7 +18,6 @@ public class GuiceServletContainerInitializer implements ServletContainerInitial
   public void onStartup(final Set<Class<?>> c, final ServletContext ctx) throws ServletException {
     ctx.addFilter("GuiceFilter", GuiceFilter.class)
       .addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-    ctx.addListener(MyDmsGuiceListener.class);
 
   }
 
