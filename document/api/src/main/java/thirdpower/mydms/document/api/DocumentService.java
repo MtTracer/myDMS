@@ -1,14 +1,23 @@
 package thirdpower.mydms.document.api;
 
 import java.util.List;
+import java.util.Optional;
+
+import com.google.common.io.ByteSource;
 
 public interface DocumentService {
 
-  Document find(long id);
+  Optional<Document> find(long id);
 
   List<Document> findAll(DocumentFilter filter);
 
-  Document save(Document document);
+  Optional<ByteSource> readContents(long id);
 
-  boolean delete(long id);
+  Document create(Document document, ByteSource contents) throws DocumentServiceException;
+
+  Document update(Document document);
+
+  void updateContents(long id, ByteSource contents) throws DocumentServiceException;
+
+  boolean delete(long id) throws DocumentServiceException;
 }

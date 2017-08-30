@@ -10,15 +10,13 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mydms.document</artifactId>
-	<name>document</name>
+	<artifactId>mydms.rest</artifactId>
+	<name>rest</name>
 	<packaging>pom</packaging>
 
 	<modules>
 		<module>api</module>
-		<module>impl</module>
-		<module>persistence</module>
-		<module>rest</module>
+		<module>jersey</module>
 	</modules>
 
 </project>

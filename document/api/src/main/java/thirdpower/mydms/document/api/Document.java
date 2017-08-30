@@ -8,18 +8,16 @@ import com.google.common.base.MoreObjects;
 import com.google.common.io.ByteSource;
 
 public class Document {
-  private Long id;
+  private final Long id;
   private final String name;
-  private final ByteSource contents;
 
-  public Document(final long id, final String name, final ByteSource contents) {
-    this(name, contents);
+  public Document(@Nullable final Long id, final String name) {
     this.id = id;
+    this.name = checkNotNull(name);
   }
 
   public Document(final String name, final ByteSource contents) {
-    this.name = checkNotNull(name);
-    this.contents = checkNotNull(contents);
+    this(null, name);
   }
 
   @Nullable
@@ -30,11 +28,6 @@ public class Document {
   public String getName() {
     return name;
   }
-
-  public ByteSource getContents() {
-    return contents;
-  }
-
 
   @Override
   public int hashCode() {

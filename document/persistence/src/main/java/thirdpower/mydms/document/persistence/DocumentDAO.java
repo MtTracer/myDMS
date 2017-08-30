@@ -1,11 +1,7 @@
 package thirdpower.mydms.document.persistence;
 
-import javax.inject.Inject;
+import thirdpower.mydms.persistence.api.AbstractDAO;
 
-public class DocumentDAO {
+public class DocumentDAO extends AbstractDAO<DocumentEntity, Long> {
 
-  @Inject
-  DocumentDAO() {
-
-  }
 }

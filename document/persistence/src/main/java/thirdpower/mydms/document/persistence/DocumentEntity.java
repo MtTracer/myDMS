@@ -14,8 +14,6 @@ public class DocumentEntity {
 
   private String name;
 
-  private long fileReferenceId;
-
   public Long getId() {
     return id;
   }
@@ -31,14 +29,5 @@ public class DocumentEntity {
   public void setName(final String name) {
     this.name = name;
   }
-
-  public long getFileReferenceId() {
-    return fileReferenceId;
-  }
-
-  public void setFileReferenceId(final long fileReferenceId) {
-    this.fileReferenceId = fileReferenceId;
-  }
-
 
 }

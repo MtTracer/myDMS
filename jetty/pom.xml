@@ -14,10 +14,20 @@
 	<name>jetty</name>
 	<packaging>jar</packaging>
 
+	<properties>
+		<slf4j.version>1.7.25</slf4j.version>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.document.impl</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.document.rest</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -30,6 +40,12 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.inject.guice</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.rest.jersey</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>
@@ -60,6 +76,7 @@
 			<artifactId>jetty-plus</artifactId>
 			<version>${jetty.version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>apache-jsp</artifactId>
@@ -72,6 +89,7 @@
 			<version>${jetty.version}</version>
 			<scope>runtime</scope>
 		</dependency>
+		 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -82,32 +100,41 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-servlet</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.document.api</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.auto.service</groupId>
-			<artifactId>auto-service</artifactId>
-			<scope>provided</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.inject.api</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.3</version>
+			<scope>runtime</scope>
 		</dependency>
+
+
+
+
 	</dependencies>
 
 	<build>

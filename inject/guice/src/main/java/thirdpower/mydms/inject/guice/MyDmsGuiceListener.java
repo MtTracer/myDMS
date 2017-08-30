@@ -1,11 +1,11 @@
-package thirdpower.mydms.jetty;
+package thirdpower.mydms.inject.guice;
 
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 
 import thirdpower.mydms.inject.api.DependencyFactory;
 
-public class GuiceListener extends GuiceServletContextListener {
+public class MyDmsGuiceListener extends GuiceServletContextListener {
 
   @Override
   protected Injector getInjector() {

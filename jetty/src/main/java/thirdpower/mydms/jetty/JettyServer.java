@@ -2,9 +2,6 @@ package thirdpower.mydms.jetty;
 
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
 
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
@@ -18,7 +15,6 @@ import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
 
 import com.google.common.io.Resources;
-import com.google.inject.servlet.GuiceFilter;
 
 public class JettyServer {
 
@@ -71,13 +67,13 @@ public class JettyServer {
   }
 
   private WebAppContext createContext() throws URISyntaxException {
-    final WebAppContext context = new WebAppContext();
-    context.setContextPath("/");
-    context.setDescriptor(WEBAPP_RESOURCES_LOCATION + "/WEB-INF/web.xml");
-    context.setConfigurations(new Configuration[] {new AnnotationConfiguration(),
+    final WebAppContext webapp = new WebAppContext();
+    webapp.setContextPath("/");
+    webapp.setDescriptor(WEBAPP_RESOURCES_LOCATION + "/WEB-INF/web.xml");
+    webapp.setConfigurations(new Configuration[] {new AnnotationConfiguration(),
         new WebXmlConfiguration(), new WebInfConfiguration(), new PlusConfiguration(),
         new MetaInfConfiguration(), new FragmentConfiguration(), new EnvConfiguration()});
-    context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
+    webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
         ".*/classes/.*");
 
     final URL webAppDir = Resources.getResource(WEBAPP_RESOURCES_LOCATION);
@@ -85,21 +81,17 @@ public class JettyServer {
       throw new RuntimeException(
           String.format("No %s directory was found into the JAR file", WEBAPP_RESOURCES_LOCATION));
     }
-    context.setResourceBase(webAppDir.toURI()
+    webapp.setResourceBase(webAppDir.toURI()
       .toString());
-    context.setParentLoaderPriority(true);
-    context.getServletContext()
+    webapp.setParentLoaderPriority(true);
+    webapp.getServletContext()
       .setExtendedListenerTypes(true);
 
-    // guice
-    context.addEventListener(new GuiceListener());
-    context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
-
-    context.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
-        ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$");
+    // webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
+    // ".*/[^/]*servlet-api-[^/]*\\.jar$|.*/javax.servlet.jsp.jstl-.*\\.jar$|.*/[^/]*taglibs.*\\.jar$");
 
     // context.addServlet(DefaultServlet.class, "/");
 
-    return context;
+    return webapp;
   }
 }

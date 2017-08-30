@@ -55,7 +55,7 @@ public class DynamicPersistenceXml {
     final URL templateUrl = Resources.getResource(getClass(), PERSISTENCE_XML_TEMPLATE);
     final String template = Resources.toString(templateUrl, StandardCharsets.UTF_8);
     final Map<String, Object> model = ImmutableMap.of("persistenceClasses", persistenceClassNames);
-    return Engine.createNonCachingEngine()
+    return Engine.createEngine()
       .transform(template, model);
   }
 
