@@ -1,4 +1,4 @@
-package thirdpower.mydms.rest.jersey;
+package thirdpower.mydms.rest.jersey.querymeta;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
