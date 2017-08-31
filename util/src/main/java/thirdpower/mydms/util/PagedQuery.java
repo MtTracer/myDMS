@@ -1,6 +1,6 @@
-package thirdpower.mydms.rest.api;
+package thirdpower.mydms.util;
 
-public class Meta {
+public class PagedQuery {
 
   public enum SortDirection {
     ascending, descending;
@@ -8,7 +8,7 @@ public class Meta {
 
   private Integer totalSize;
   private Integer pageSize;
-  private Integer pageOffset;
+  private Integer pageOffset=0;
   private String sort;
   private SortDirection sortDirection = SortDirection.ascending;
 

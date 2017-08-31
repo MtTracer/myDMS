@@ -1,15 +1,17 @@
-package thirdpower.mydms.rest.api;
+package thirdpower.mydms.rest.jersey.querymeta;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import thirdpower.mydms.util.PagedQuery;
+
 public class MetaWrapper {
 
-  public static  MetaWrapper of(Object data, Meta meta) {
+  public static  MetaWrapper of(Object data, PagedQuery meta) {
    return new MetaWrapper();
   }
   
-  private Meta meta;
+  private PagedQuery meta;
   
   private Object result;
 
@@ -17,7 +19,7 @@ public class MetaWrapper {
     
   }
   
-  public MetaWrapper(Object result, Meta meta) {
+  public MetaWrapper(Object result, PagedQuery meta) {
     checkNotNull(result);
     checkNotNull(meta);
     Class<? extends Object> resultClass = result.getClass();
@@ -27,7 +29,7 @@ public class MetaWrapper {
     this.meta = meta;
   }
 
-  public Meta getMeta() {
+  public PagedQuery getMeta() {
     return meta;
   }
 

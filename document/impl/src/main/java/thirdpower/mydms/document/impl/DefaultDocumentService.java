@@ -3,16 +3,13 @@ package thirdpower.mydms.document.impl;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
 import com.google.common.io.ByteSource;
 import com.google.inject.persist.Transactional;
-import com.google.j2objc.annotations.LoopTranslation;
 
 import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentFilter;

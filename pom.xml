@@ -32,6 +32,7 @@
 		<module>jetty</module>
 		<module>persistence</module>
 		<module>rest</module>
+		<module>util</module>
 
 	</modules>
 
@@ -232,6 +233,11 @@
 				<groupId>thirdpower.mydms</groupId>
 				<artifactId>mydms.rest.api</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>thirdpower.mydms</groupId>
+				<artifactId>mydms.util</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

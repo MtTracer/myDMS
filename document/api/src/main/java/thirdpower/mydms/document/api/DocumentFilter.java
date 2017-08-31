@@ -30,11 +30,13 @@ public final class DocumentFilter {
     return nameFilterMode;
   }
 
+  
   public static enum NameFilterMode {
     EQUALS, CONTAINS, REGEX
   }
 
   public static final class Builder {
+    
     private String name = null;
     private NameFilterMode nameFilterMode = NameFilterMode.EQUALS;
 
@@ -45,7 +47,7 @@ public final class DocumentFilter {
       this.nameFilterMode = checkNotNull(mode);
       return this;
     }
-
+    
     public DocumentFilter build() {
       return new DocumentFilter(this);
     }

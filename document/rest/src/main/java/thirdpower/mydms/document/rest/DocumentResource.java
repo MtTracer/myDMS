@@ -22,8 +22,6 @@ import com.google.common.io.ByteSource;
 import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentService;
 import thirdpower.mydms.document.api.DocumentServiceException;
-import thirdpower.mydms.rest.api.MetaWrapper;
-import thirdpower.mydms.rest.api.Meta;
 
 @Path("documents")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -64,7 +62,7 @@ public class DocumentResource {
   }
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public List<DocumentPojo> findAll(@Context Meta meta) {
+  public List<DocumentPojo> findAll() {
     return service.findAll(null).map(this::toPojo).collect(Collectors.toList());
   }
   

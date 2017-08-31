@@ -6,22 +6,12 @@
 
 	<parent>
 		<groupId>thirdpower.mydms</groupId>
-		<artifactId>mydms.rest</artifactId>
+		<artifactId>mydms</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>mydms.rest.api</artifactId>
-	<name>rest-api</name>
+	<artifactId>mydms.util</artifactId>
+	<name>util</name>
 	<packaging>jar</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.util</artifactId><version>${project.version}</version>
-		</dependency>
-	</dependencies>
 </project>

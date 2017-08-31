@@ -6,34 +6,46 @@ import javax.inject.Provider;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
 
-import thirdpower.mydms.rest.api.Meta;
-import thirdpower.mydms.rest.api.Meta.SortDirection;
+import thirdpower.mydms.util.PagedQuery;
+import thirdpower.mydms.util.PagedQuery.SortDirection;
 
-public class MetaProvider implements Provider<Meta> {
-
+public class PagedQueryProvider implements Provider<PagedQuery> {
 
   private UriInfo uriInfo;
   private HttpHeaders headers;
 
-
   @Inject
-  MetaProvider(UriInfo uriInfo, HttpHeaders headers) {
+  PagedQueryProvider(UriInfo uriInfo, HttpHeaders headers) {
     this.uriInfo = uriInfo;
     this.headers = headers;
   }
 
-
   @Override
-  public Meta get() {
-    Meta meta = new Meta();
-    meta.setPageSize(parseMetaInt("pageSize"));
-    meta.setPageOffset(parseMetaInt("pageOffset"));
-    meta.setSort(parseMetaString("sort"));
-    meta.setSortDirection(parseMetaEnum("sortDirection", SortDirection.class));
+  public PagedQuery get() {
+    PagedQuery pagedQuery = new PagedQuery();
+    
+    Integer pageSize = parseMetaInt("pageSize");
+    if(null!=pageSize) {
+    pagedQuery.setPageSize(pageSize);
+    }
+    
+    Integer pageOffset = parseMetaInt("pageOffset");
+    if(null!=pageOffset) {
+      pagedQuery.setPageOffset(pageOffset);
+    }
+    
+    String sort = parseMetaString("sort");
+    if(null!=sort) {
+      pagedQuery.setSort(sort);
+    }
+    
+    SortDirection sortDirection = parseMetaEnum("sortDirection", SortDirection.class);
+    if(null!=sortDirection) {
+      pagedQuery.setSortDirection(sortDirection);
+    }
 
-    return meta;
+    return pagedQuery;
   }
-
 
   @Nullable
   private Integer parseMetaInt(String name) {
@@ -48,7 +60,6 @@ public class MetaProvider implements Provider<Meta> {
       return null;
     }
   }
-
 
   private String parseMetaString(String name) {
     String value = uriInfo.getQueryParameters()

@@ -10,22 +10,21 @@ import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 
-import thirdpower.mydms.rest.api.MetaWrapper;
-import thirdpower.mydms.rest.api.Meta;
+import thirdpower.mydms.util.PagedQuery;
 
 public class MetaWrapperFilter implements ContainerResponseFilter {
 
-  private Provider<Meta> metaProvider;
+  private Provider<PagedQuery> metaProvider;
 
   @Inject
-  MetaWrapperFilter(Provider<Meta> metaProvider) {
+  MetaWrapperFilter(Provider<PagedQuery> metaProvider) {
     this.metaProvider = checkNotNull(metaProvider);
   }
 
   @Override
   public void filter(ContainerRequestContext requestContext,
       ContainerResponseContext responseContext) throws IOException {
-    Meta meta = metaProvider.get();
+    PagedQuery meta = metaProvider.get();
     if(null==meta) {
       return;
     }
