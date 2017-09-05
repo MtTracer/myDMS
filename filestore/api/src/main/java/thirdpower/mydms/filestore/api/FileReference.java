@@ -14,7 +14,7 @@ import com.google.common.io.ByteSource;
 
 public class FileReference {
   private final Long id;
-  private final String name;
+  private final String fileName;
   private final ByteSource contents;
   private final Map<String, String> meta;
 
@@ -24,14 +24,14 @@ public class FileReference {
 
   public static final Builder builderFrom(final FileReference data) {
     return builder().setId(data.id)
-      .setName(data.name)
+      .setFileName(data.fileName)
       .setContentsSource(data.contents)
       .setMeta(data.meta);
   }
 
   public FileReference(final Builder builder) {
     id = builder.id;
-    name = builder.name;
+    fileName = builder.name;
     contents = builder.contents;
     meta = builder.meta;
   }
@@ -42,7 +42,7 @@ public class FileReference {
   }
 
   public String getName() {
-    return name;
+    return fileName;
   }
 
   public ByteSource getContents() {
@@ -64,7 +64,7 @@ public class FileReference {
       return this;
     }
 
-    public Builder setName(final String name) {
+    public Builder setFileName(final String name) {
       checkNotNull(name);
       checkArgument(!name.isEmpty(), "name must not be empty");
       this.name = name;

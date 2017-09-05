@@ -43,7 +43,7 @@ class DefaultDocumentService implements DocumentService {
   }
 
   private Document fromEntity(final DocumentEntity entity) {
-    return new Document(entity.getId(), entity.getName());
+    return new Document(entity.getId(), entity.getFileName());
   }
 
   @Override
@@ -60,7 +60,7 @@ class DefaultDocumentService implements DocumentService {
     }
 
     try {
-      filestoreService.delete(id, entity.getName());
+      filestoreService.delete(id, entity.getFileName());
 
     } catch (final FileStoreException e) {
       throw new DocumentServiceException("Could not delete document file.", e);
@@ -77,7 +77,7 @@ class DefaultDocumentService implements DocumentService {
       return Optional.empty();
     }
 
-    final Optional<FileReference> fileRef = filestoreService.read(id, entity.getName());
+    final Optional<FileReference> fileRef = filestoreService.read(id, entity.getFileName());
     return fileRef.map(FileReference::getContents);
   }
 
@@ -86,11 +86,11 @@ class DefaultDocumentService implements DocumentService {
   public Document create(final Document document, final ByteSource contents)
       throws DocumentServiceException {
     DocumentEntity entity = new DocumentEntity();
-    entity.setName(document.getName());
+    entity.setFileName(document.getName());
     entity = documentDAO.persist(entity);
 
     try {
-      filestoreService.save(entity.getId(), entity.getName(), contents);
+      filestoreService.save(entity.getId(), entity.getFileName(), contents);
     } catch (final FileStoreException e) {
       throw new DocumentServiceException("Could not save document.", e);
     }
@@ -102,7 +102,7 @@ class DefaultDocumentService implements DocumentService {
   public Document update(final Document document) {
     DocumentEntity entity = documentDAO.findById(document.getId());
     checkArgument(null != entity, "Can't find document with id %s for update.", document.getId());
-    entity.setName(document.getName());
+    entity.setFileName(document.getName());
     entity = documentDAO.persist(entity);
     return fromEntity(entity);
   }
@@ -114,7 +114,7 @@ class DefaultDocumentService implements DocumentService {
     checkArgument(null != entity, "Can't find document with id %s for update.", id);
 
     try {
-      filestoreService.save(id, entity.getName(), contents);
+      filestoreService.save(id, entity.getFileName(), contents);
     } catch (final FileStoreException e) {
       throw new DocumentServiceException("Could not update document contents.", e);
     }

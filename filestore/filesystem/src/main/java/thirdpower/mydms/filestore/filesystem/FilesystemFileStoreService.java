@@ -39,7 +39,7 @@ public class FilesystemFileStoreService implements FileStoreService {
     final ByteSource source = com.google.common.io.Files.asByteSource(targetFile);
     final FileReference fileReference = FileReference.builder()
       .setId(fileReferenceId)
-      .setName(filename)
+      .setFileName(filename)
       .setContentsSource(source)
       .build();
     return Optional.of(fileReference);
@@ -66,7 +66,7 @@ public class FilesystemFileStoreService implements FileStoreService {
     final ByteSource targetFileSource = com.google.common.io.Files.asByteSource(targetFile);
     return FileReference.builder()
       .setId(fileReferenceId)
-      .setName(filename)
+      .setFileName(filename)
       .setContentsSource(targetFileSource)
       .build();
   }
@@ -86,30 +86,28 @@ public class FilesystemFileStoreService implements FileStoreService {
 
   private void cleanupEmptyFolders(final Path targetPath) {
     final Path root = config.getRoot();
-    if (!targetPath.startsWith(root) || targetPath.equals(root)) {
-      return;
-    }
+    
+    for(Path cleanPath = targetPath; cleanPath.startsWith(root) && !cleanPath.equals(root); cleanPath = cleanPath.getParent()) {
+      try {
+        final DirectoryStream<Path> directoryStream = Files.newDirectoryStream(targetPath);
+        if (directoryStream.iterator()
+          .hasNext()) {
+          // directory not empty
+          return;
+        }
 
-    try {
-      final DirectoryStream<Path> directoryStream = Files.newDirectoryStream(targetPath);
-      if (directoryStream.iterator()
-        .hasNext()) {
-        // directory not empty
+        Files.delete(targetPath);
+        cleanPath = cleanPath.getParent();
+      } catch (final Exception e) {
+        // TODO log warning
         return;
       }
-
-      Files.delete(targetPath);
-    } catch (final Exception e) {
-      // TODO log warning
-      return;
     }
-
-    cleanupEmptyFolders(targetPath.getParent());
   }
 
   private Path createTargetPath(final long fileReferenceId, final String filename) {
     final PathStrategy pathStrategy = config.getPathStrategy();
-    return pathStrategy.createDirectoryPath(config.getRoot(), fileReferenceId, filename);
+    return pathStrategy.createPath(config.getRoot(), fileReferenceId, filename);
   }
 
 }

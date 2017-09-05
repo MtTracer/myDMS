@@ -14,14 +14,4 @@
 	<name>rest-api</name>
 	<packaging>jar</packaging>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.util</artifactId><version>${project.version}</version>
-		</dependency>
-	</dependencies>
 </project>

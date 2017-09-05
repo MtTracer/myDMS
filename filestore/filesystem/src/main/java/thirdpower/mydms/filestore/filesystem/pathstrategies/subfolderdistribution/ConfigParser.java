@@ -7,6 +7,9 @@ import thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistributio
 
 public class ConfigParser {
 
+  private static final String CONFIG_NAME = "subfolderDistribution";
+  private static final String CONFIG_SUBFOLDER_LENGTH = "subFolderLength";
+
   @Inject
   ConfigParser() {
 
@@ -15,12 +18,12 @@ public class ConfigParser {
   SubfolderDistributionConfiguration parse(final JsonObject configJson) {
     final Builder builder = SubfolderDistributionConfiguration.builder();
     final JsonObject subfolderDistributionConfigJson =
-        configJson.getJsonObject("subfolderDivision");
+        configJson.getJsonObject(CONFIG_NAME);
     if (null == subfolderDistributionConfigJson) {
       builder.build();
     }
 
-    builder.setSubFolderLength(configJson.getInt("subFolderLength", 4));
+    builder.setSubFolderLength(configJson.getInt(CONFIG_SUBFOLDER_LENGTH, 4));
 
     // TODO set hashfunction
     // TODO set encoding

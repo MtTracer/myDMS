@@ -25,7 +25,7 @@ public class PathStrategyModuleTest {
     final PathStrategy testStratgy = new PathStrategy() {
 
       @Override
-      public Path createDirectoryPath(final Path root, final long id, final String filename) {
+      public Path createPath(final Path root, final long id, final String filename) {
         return null;
       }
     };

@@ -22,12 +22,12 @@ public class SubfolderDistributionStrategy implements PathStrategy {
   }
 
   @Override
-  public Path createDirectoryPath(final Path root, final long id, final String filename) {
+  public Path createPath(final Path root, final long id, final String filename) {
 
     final byte[] hash = createHash(id, filename);
     final String path = encodePath(hash);
     final Path directory = createDirectoryPath(root, path);
-    return directory.resolve(filename);
+    return directory.resolve(String.valueOf(id)).resolve(filename);
   }
 
   private byte[] createHash(final long id, final String filename) {

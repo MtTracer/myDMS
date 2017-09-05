@@ -12,7 +12,7 @@ public class DocumentEntity {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  private String name;
+  private String fileName;
 
   public Long getId() {
     return id;
@@ -22,12 +22,12 @@ public class DocumentEntity {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getFileName() {
+    return fileName;
   }
 
-  public void setName(final String name) {
-    this.name = name;
+  public void setFileName(final String fileName) {
+    this.fileName = fileName;
   }
 
 }
