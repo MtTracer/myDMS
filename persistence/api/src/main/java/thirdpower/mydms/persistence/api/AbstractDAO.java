@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -41,45 +40,45 @@ public abstract class AbstractDAO<E, K> {
   }
 
   public List<E> findAll() {
-    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 
-    PagedQuery pagedQuery = pagedQueryProvider.get();
+    final PagedQuery pagedQuery = pagedQueryProvider.get();
 
 
-    CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(getEntityClass());
-    Root<E> from = buildFilteredQuery(criteriaQuery);
-    CriteriaQuery<E> select = criteriaQuery.select(from);
+    final CriteriaQuery<E> criteriaQuery = criteriaBuilder.createQuery(getEntityClass());
+    final Root<E> from = buildFilteredQuery(criteriaQuery);
+    final CriteriaQuery<E> select = criteriaQuery.select(from);
     TypedQuery<E> entityQuery = entityManager.createQuery(select);
 
     if (pagedQuery != null) {
-      Long count = fetchResultCount(criteriaBuilder);
+      final Long count = fetchResultCount(criteriaBuilder);
       pagedQuery.setTotalSize(count.intValue());
-      
+
       if (null != pagedQuery.getPageSize()) {
-        Integer pageSize = pagedQuery.getPageSize();
-        Integer pageOffset = pagedQuery.getPageOffset();
-        
-        if(pageSize*pageOffset > count) {
+        final Integer pageSize = pagedQuery.getPageSize();
+        final Integer pageOffset = pagedQuery.getPageOffset();
+
+        if (pageSize * pageOffset > count) {
           return ImmutableList.of();
         }
-        
+
         entityQuery = entityQuery.setFirstResult(pageSize * pageOffset) //
           .setMaxResults(pageSize);
       }
     }
-    
+
     return entityQuery.getResultList();
   }
 
-  private Long fetchResultCount(CriteriaBuilder criteriaBuilder) {
-    CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
+  private Long fetchResultCount(final CriteriaBuilder criteriaBuilder) {
+    final CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
     countQuery.select(criteriaBuilder.count(buildFilteredQuery(countQuery)));
-    Long count = entityManager.createQuery(countQuery)
+    final Long count = entityManager.createQuery(countQuery)
       .getSingleResult();
     return count;
   }
 
-  private Root<E> buildFilteredQuery(CriteriaQuery<?> countQuery) {
+  private Root<E> buildFilteredQuery(final CriteriaQuery<?> countQuery) {
     return countQuery.from(getEntityClass());
     // TODO add wheres
   }
@@ -90,11 +89,11 @@ public abstract class AbstractDAO<E, K> {
   }
 
   public static final class PagedResult<E> {
-    private List<E> result;
-    private Paging paging;
-    private int totalResults;
+    private final List<E> result;
+    private final Paging paging;
+    private final int totalResults;
 
-    PagedResult(List<E> result, Paging paging, int totalResults) {
+    PagedResult(final List<E> result, final Paging paging, final int totalResults) {
       this.result = result;
       this.paging = paging;
       this.totalResults = totalResults;

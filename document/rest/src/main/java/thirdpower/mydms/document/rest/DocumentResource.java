@@ -14,7 +14,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import com.google.common.io.ByteSource;
@@ -39,10 +38,10 @@ public class DocumentResource {
   @Path("{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public DocumentPojo findById(@PathParam("id") final long id) {
-    Document document = service.find(id)
+    final Document document = service.find(id)
       .orElseThrow(NotFoundException::new);
-    
-    DocumentPojo documentPojo = toPojo(document);
+
+    final DocumentPojo documentPojo = toPojo(document);
     return documentPojo;
   }
 
@@ -53,29 +52,33 @@ public class DocumentResource {
     pojo.setId(null);
     final Document docToSave = fromPojo(pojo);
     try {
-      Document createdDocument = service.create(docToSave, ByteSource.wrap("test".getBytes()));
+      final Document createdDocument =
+          service.create(docToSave, ByteSource.wrap("test".getBytes()));
       pojo.setId(createdDocument.getId());
       return pojo;
     } catch (final DocumentServiceException e) {
       throw new InternalServerErrorException("Could not create document:", e);
     }
   }
+
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public List<DocumentPojo> findAll() {
-    return service.findAll(null).map(this::toPojo).collect(Collectors.toList());
+    return service.findAll(null)
+      .map(this::toPojo)
+      .collect(Collectors.toList());
   }
-  
-  private DocumentPojo toPojo(Document document) {
-    DocumentPojo documentPojo = new DocumentPojo();
+
+  private DocumentPojo toPojo(final Document document) {
+    final DocumentPojo documentPojo = new DocumentPojo();
     documentPojo.setId(document.getId());
     documentPojo.setName(document.getName());
     return documentPojo;
   }
-  
+
   private Document fromPojo(final DocumentPojo pojo) {
     return new Document(null, pojo.getName());
   }
-  
+
 
 }

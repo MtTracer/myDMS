@@ -20,6 +20,9 @@
 		<jax-rs.version>2.0.1</jax-rs.version>
 		<jersey.version>2.25.1</jersey.version>
 
+		<kotlin-plugin.version>1.1.4-3</kotlin-plugin.version>
+		<kotlin-lang.version>1.1</kotlin-lang.version>
+
 		<analyzeDependencies.failOnError>true</analyzeDependencies.failOnError>
 		<analyzeDependencies.skip>false</analyzeDependencies.skip>
 	</properties>
@@ -239,6 +242,12 @@
 				<artifactId>mydms.util</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.jetbrains.kotlin</groupId>
+				<artifactId>kotlin-stdlib-jre8</artifactId>
+				<version>${kotlin.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -251,6 +260,43 @@
 					<version>3.0.0</version>
 				</plugin>
 
+
+				<plugin>
+					<artifactId>kotlin-maven-plugin</artifactId>
+					<groupId>org.jetbrains.kotlin</groupId>
+					<version>${kotlin-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>compile</id>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+							<configuration>
+								<sourceDirs>
+									<sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/src/main/java</sourceDir>
+								</sourceDirs>
+							</configuration>
+						</execution>
+						<execution>
+							<id>test-compile</id>
+							<goals>
+								<goal>test-compile</goal>
+							</goals>
+							<configuration>
+								<sourceDirs>
+									<sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+									<sourceDir>${project.basedir}/src/test/java</sourceDir>
+								</sourceDirs>
+							</configuration>
+						</execution>
+					</executions>
+					<configuration>
+						<languageVersion>${kotlin-lang.version}</languageVersion>
+						<apiVersion>${kotlin-lang.version}</apiVersion>
+						<myIncremental>true</myIncremental>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -259,6 +305,32 @@
 						<source>${java.version}</source>
 						<target>${java.version}</target>
 					</configuration>
+					<executions>
+						<!-- Replacing default-compile as it is treated specially by maven -->
+						<execution>
+							<id>default-compile</id>
+							<phase>none</phase>
+						</execution>
+						<!-- Replacing default-testCompile as it is treated specially by maven -->
+						<execution>
+							<id>default-testCompile</id>
+							<phase>none</phase>
+						</execution>
+						<execution>
+							<id>java-compile</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>java-test-compile</id>
+							<phase>test-compile</phase>
+							<goals>
+								<goal>testCompile</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 
 				<plugin>
@@ -311,6 +383,14 @@
 		</pluginManagement>
 
 		<plugins>
+			<plugin>
+				<artifactId>kotlin-maven-plugin</artifactId>
+				<groupId>org.jetbrains.kotlin</groupId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
