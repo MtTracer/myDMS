@@ -16,8 +16,21 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.category.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib</artifactId>
 		</dependency>
 	</dependencies>
 </project>
