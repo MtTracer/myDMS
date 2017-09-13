@@ -10,7 +10,7 @@ interface CategoryService {
 	
 	fun getCategoryTree() : Graph<Category>;
 	
-	fun save(category: Category): Category;
+	fun save(parentId: Long, category: Category): Category;
 	
 	fun saveTree(categoryTree: Graph<Category>) : Graph<Category>;
 	

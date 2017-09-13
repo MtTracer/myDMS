@@ -15,7 +15,7 @@ import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentFilter;
 import thirdpower.mydms.document.api.DocumentService;
 import thirdpower.mydms.document.api.DocumentServiceException;
-import thirdpower.mydms.document.persistence.DocumentDAO;
+import thirdpower.mydms.document.persistence.DocumentRepository;
 import thirdpower.mydms.document.persistence.DocumentEntity;
 import thirdpower.mydms.filestore.api.FileReference;
 import thirdpower.mydms.filestore.api.FileStoreException;
@@ -24,10 +24,10 @@ import thirdpower.mydms.filestore.api.FileStoreService;
 class DefaultDocumentService implements DocumentService {
 
   private final FileStoreService filestoreService;
-  private final DocumentDAO documentDAO;
+  private final DocumentRepository documentDAO;
 
   @Inject
-  DefaultDocumentService(final FileStoreService filestoreService, final DocumentDAO documentDAO) {
+  DefaultDocumentService(final FileStoreService filestoreService, final DocumentRepository documentDAO) {
     this.documentDAO = checkNotNull(documentDAO);
     this.filestoreService = checkNotNull(filestoreService);
   }

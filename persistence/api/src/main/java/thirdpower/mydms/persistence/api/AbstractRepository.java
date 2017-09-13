@@ -16,7 +16,7 @@ import com.google.common.reflect.TypeToken;
 import thirdpower.mydms.util.PagedQuery;
 
 
-public abstract class AbstractDAO<E, K> {
+public abstract class AbstractRepository<E, K> {
 
   @Inject
   private EntityManager entityManager;

@@ -13,5 +13,25 @@
 	<artifactId>mydms.category.persistence</artifactId>
 	<name>category-persistence</name>
 	<packaging>jar</packaging>
-
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.persistence.api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.auto.service</groupId>
+			<artifactId>auto-service</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>
