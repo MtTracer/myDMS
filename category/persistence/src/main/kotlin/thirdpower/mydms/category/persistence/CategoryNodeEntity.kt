@@ -5,17 +5,18 @@ import javax.persistence.Id
 import javax.persistence.Column
 import javax.persistence.OneToOne
 import javax.persistence.EmbeddedId
+import javax.persistence.OneToMany
+import javax.persistence.ManyToOne
+import javax.persistence.OrderBy
 
 @Entity
 data class CategoryNodeEntity(
-		@EmbeddedId
-		var id: CategoryNodeId,
-		var index: Int) {
-
+    @ManyToOne
+    val parent: CategoryEntity,
+    val current: CategoryEntity,
+    @OneToMany(mappedBy="parent")
+	@OrderBy("index")
+    val children: List<CategoryEntity>) {
 	
 }
 
-data class CategoryNodeId(
-			var categoryId: Long,
-			var parentCategoryId: Long
-)
