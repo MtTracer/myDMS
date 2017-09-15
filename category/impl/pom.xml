@@ -32,5 +32,10 @@
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.category.persistence</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>

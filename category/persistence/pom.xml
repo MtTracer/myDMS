@@ -13,7 +13,7 @@
 	<artifactId>mydms.category.persistence</artifactId>
 	<name>category-persistence</name>
 	<packaging>jar</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -33,15 +33,15 @@
 			<artifactId>guice</artifactId>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jre8</artifactId>
-=======
-			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.persistence.h2embedded</artifactId>
-			<version>${project.version}</version>
-			<scope>test</scope>
 		</dependency>
+	<dependency>
+		<groupId>thirdpower.mydms</groupId>
+		<artifactId>mydms.persistence.h2embedded</artifactId>
+		<version>${project.version}</version>
+		<scope>test</scope>
+	</dependency>
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -56,8 +56,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
->>>>>>> branch 'master' of https://github.com/MtTracer/myDMS.git
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 </project>

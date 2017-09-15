@@ -27,12 +27,20 @@ public abstract class AbstractRepository<E, K> {
   private final TypeToken<E> entityTypeToken = new TypeToken<E>(getClass()) {};
 
   public E persist(final E entity) {
+    entityManager.getTransaction()
+      .begin();
     entityManager.persist(entity);
+    entityManager.getTransaction()
+      .commit();
     return entity;
   }
 
   public void remove(final E entity) {
+    entityManager.getTransaction()
+      .begin();
     entityManager.remove(entity);
+    entityManager.getTransaction()
+      .commit();
   }
 
   public E findById(final K id) {
@@ -86,6 +94,10 @@ public abstract class AbstractRepository<E, K> {
   @SuppressWarnings("unchecked")
   private Class<E> getEntityClass() {
     return (Class<E>) entityTypeToken.getRawType();
+  }
+
+  protected final EntityManager getEntityManager() {
+    return entityManager;
   }
 
   public static final class PagedResult<E> {

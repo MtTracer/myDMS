@@ -283,6 +283,7 @@
 					<groupId>org.jetbrains.kotlin</groupId>
 					<version>${kotlin.version}</version>
 					<executions>
+					<!-- 
 						<execution>
 							<id>kapt</id>
 							<goals>
@@ -302,6 +303,7 @@
 								</annotationProcessorPaths>
 							</configuration>
 						</execution>
+					 -->
 						<execution>
 							<id>compile</id>
 							<goals>
