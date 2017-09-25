@@ -14,4 +14,14 @@
 	<name>util</name>
 	<packaging>jar</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.jetbrains.kotlin</groupId>
+			<artifactId>kotlin-stdlib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+		</dependency>
+	</dependencies>
 </project>

@@ -1,0 +1,19 @@
+import thirdpower.mydms.type.api.TypeDefinition
+
+data class Type(
+        private val definition: TypeDefinition,
+        private val properties: MutableMap<Long, Any> = mutableMapOf()
+) {
+    fun setProperty(propertyId: Long, value: String) {
+        val propertyDefinition = definition.properties.find { propertyId == it.id }
+        propertyDefinition?.apply {
+            properties[propertyId] = dataType.handler.parseValue(value)
+        }
+    }
+
+    fun getProperty(propertyId: Long): String? {
+        val prop = properties[propertyId] ?: return null
+        val propertyDefinition = definition.properties.find { propertyId == it.id } ?: return null
+        return propertyDefinition.dataType.handler.serializeValue(prop)
+    }
+}

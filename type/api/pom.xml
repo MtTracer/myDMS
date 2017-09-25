@@ -14,4 +14,10 @@
 	<name>type-api</name>
 	<packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>thirdpower.mydms</groupId>
+            <artifactId>mydms.util</artifactId>
+        </dependency>
+    </dependencies>
 </project>

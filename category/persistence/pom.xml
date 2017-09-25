@@ -36,21 +36,15 @@
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib-jre8</artifactId>
 		</dependency>
-	<dependency>
-		<groupId>thirdpower.mydms</groupId>
-		<artifactId>mydms.persistence.h2embedded</artifactId>
-		<version>${project.version}</version>
-		<scope>test</scope>
-	</dependency>
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.persistence.h2embedded</artifactId>
+			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

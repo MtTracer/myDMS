@@ -1,11 +1,10 @@
 package thirdpower.mydms.category.api
 
-data class CategoryFilter(val name: String? = null, val nameFilterMode: NameFilterMode? = null) {
+import thirdpower.mydms.utils.StringFilterMode
 
-	fun withNameFilter(nameFilter: String, filterMode: NameFilterMode): CategoryFilter =
-			copy(name = nameFilter, nameFilterMode = filterMode)
-
-	enum class NameFilterMode {
-		EQUALS, CONTAINS, REGEX
-	}
+data class CategoryFilter(
+		val nameFilter: String?,
+		val nameFilterMode: StringFilterMode?
+) {
+	fun withNameFilter(nameFilter: String, nameFilterMode: StringFilterMode): CategoryFilter = copy(nameFilter = nameFilter, nameFilterMode = nameFilterMode)
 }
