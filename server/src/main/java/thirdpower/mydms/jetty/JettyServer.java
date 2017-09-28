@@ -1,20 +1,14 @@
 package thirdpower.mydms.jetty;
 
-import java.net.URISyntaxException;
-import java.net.URL;
-
+import com.google.common.io.Resources;
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.plus.webapp.EnvConfiguration;
 import org.eclipse.jetty.plus.webapp.PlusConfiguration;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.Configuration;
-import org.eclipse.jetty.webapp.FragmentConfiguration;
-import org.eclipse.jetty.webapp.MetaInfConfiguration;
-import org.eclipse.jetty.webapp.WebAppContext;
-import org.eclipse.jetty.webapp.WebInfConfiguration;
-import org.eclipse.jetty.webapp.WebXmlConfiguration;
+import org.eclipse.jetty.webapp.*;
 
-import com.google.common.io.Resources;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 public class JettyServer {
 

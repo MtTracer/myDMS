@@ -22,6 +22,7 @@
 		<auto-service.version>1.0-rc3</auto-service.version>
 		<kotlin.version>1.1.50</kotlin.version>
 		<kotlin-lang.version>1.1</kotlin-lang.version>
+        <tornadofx.version>1.7.11</tornadofx.version>
 
 		<analyzeDependencies.failOnError>true</analyzeDependencies.failOnError>
 		<analyzeDependencies.skip>false</analyzeDependencies.skip>
@@ -29,11 +30,12 @@
 
 	<modules>
 		<module>category</module>
+        <module>client</module>
 		<module>config</module>
 		<module>document</module>
 		<module>filestore</module>
 		<module>inject</module>
-		<module>jetty</module>
+        <module>server</module>
 		<module>persistence</module>
 		<module>rest</module>
 		<module>type</module>
@@ -224,6 +226,21 @@
 				<artifactId>mydms.document.api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.rest.api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.category.api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
 			<dependency>
 				<groupId>javax.ws.rs</groupId>
@@ -245,16 +262,6 @@
 				<artifactId>jersey-media-json-jackson</artifactId>
 				<version>${jersey.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>thirdpower.mydms</groupId>
-				<artifactId>mydms.rest.api</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>thirdpower.mydms</groupId>
-				<artifactId>mydms.util</artifactId>
-				<version>${project.version}</version>
-			</dependency>
 
 			<dependency>
 				<groupId>org.jetbrains.kotlin</groupId>
@@ -271,10 +278,11 @@
 				<artifactId>annotations</artifactId>
 				<version>13.0</version>
 			</dependency>
+
 			<dependency>
-				<groupId>thirdpower.mydms</groupId>
-				<artifactId>mydms.category.api</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+                <groupId>no.tornado</groupId>
+                <artifactId>tornadofx</artifactId>
+                <version>${tornadofx.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
