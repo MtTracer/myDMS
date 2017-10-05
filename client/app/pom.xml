@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>thirdpower.mydms</groupId>
+        <artifactId>mydms.client</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mydms.client.app</artifactId>
+    <name>mydms-client-app</name>
+    <packaging>jar</packaging>
+
+    <properties>
+
+        <mainClass>thirdpower.mydms.client.app.MyDmsApp</mainClass>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>thirdpower.mydms</groupId>
+            <artifactId>mydms.client.document</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>thirdpower.mydms</groupId>
+            <artifactId>mydms.client.category</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>thirdpower.mydms</groupId>
+            <artifactId>mydms.client.type</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>no.tornado</groupId>
+            <artifactId>tornadofx</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

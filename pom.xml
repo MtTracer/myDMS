@@ -20,9 +20,8 @@
 		<jax-rs.version>2.0.1</jax-rs.version>
 		<jersey.version>2.25.1</jersey.version>
 		<auto-service.version>1.0-rc3</auto-service.version>
-		<kotlin.version>1.1.50</kotlin.version>
+        <kotlin.version>1.1.51</kotlin.version>
 		<kotlin-lang.version>1.1</kotlin-lang.version>
-        <tornadofx.version>1.7.11</tornadofx.version>
 
 		<analyzeDependencies.failOnError>true</analyzeDependencies.failOnError>
 		<analyzeDependencies.skip>false</analyzeDependencies.skip>
@@ -221,11 +220,39 @@
 				<artifactId>mydms.persistence.api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>thirdpower.mydms</groupId>
 				<artifactId>mydms.document.api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.document.runtime</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.document.ui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.type.api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.type.runtime</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.type.ui</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
                 <artifactId>mydms.rest.api</artifactId>
@@ -236,9 +263,20 @@
                 <artifactId>mydms.util</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
                 <artifactId>mydms.category.api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.category.runtime</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.category.ui</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -279,11 +317,6 @@
 				<version>13.0</version>
 			</dependency>
 
-			<dependency>
-                <groupId>no.tornado</groupId>
-                <artifactId>tornadofx</artifactId>
-                <version>${tornadofx.version}</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

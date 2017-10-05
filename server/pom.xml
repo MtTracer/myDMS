@@ -21,14 +21,17 @@
 	<dependencies>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.document.impl</artifactId>
-			<version>${project.version}</version>
+			<artifactId>mydms.document.runtime</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
-			<artifactId>mydms.document.rest</artifactId>
-			<version>${project.version}</version>
+			<artifactId>mydms.category.runtime</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdpower.mydms</groupId>
+			<artifactId>mydms.type.runtime</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>

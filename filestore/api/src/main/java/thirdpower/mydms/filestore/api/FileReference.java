@@ -1,16 +1,13 @@
 package thirdpower.mydms.filestore.api;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.io.ByteSource;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.*;
 
 public class FileReference {
   private final Long id;
@@ -18,11 +15,11 @@ public class FileReference {
   private final ByteSource contents;
   private final Map<String, String> meta;
 
-  public static final Builder builder() {
+  public static Builder builder() {
     return new Builder();
   }
 
-  public static final Builder builderFrom(final FileReference data) {
+  public static Builder builderFrom(final FileReference data) {
     return builder().setId(data.id)
       .setFileName(data.fileName)
       .setContentsSource(data.contents)

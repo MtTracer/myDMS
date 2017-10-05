@@ -1,6 +1,8 @@
 package thirdpower.mydms.persistence.api;
 
-import java.util.List;
+import com.google.common.collect.ImmutableList;
+import com.google.common.reflect.TypeToken;
+import thirdpower.mydms.util.PagedQuery;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -9,11 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.reflect.TypeToken;
-
-import thirdpower.mydms.util.PagedQuery;
+import java.util.List;
 
 
 public abstract class AbstractRepository<E, K> {
@@ -35,9 +33,10 @@ public abstract class AbstractRepository<E, K> {
     return entity;
   }
 
-  public void remove(final E entity) {
+  public void remove(E entity) {
     entityManager.getTransaction()
       .begin();
+    entity = entityManager.merge(entity);
     entityManager.remove(entity);
     entityManager.getTransaction()
       .commit();
@@ -81,9 +80,8 @@ public abstract class AbstractRepository<E, K> {
   private Long fetchResultCount(final CriteriaBuilder criteriaBuilder) {
     final CriteriaQuery<Long> countQuery = criteriaBuilder.createQuery(Long.class);
     countQuery.select(criteriaBuilder.count(buildFilteredQuery(countQuery)));
-    final Long count = entityManager.createQuery(countQuery)
+    return entityManager.createQuery(countQuery)
       .getSingleResult();
-    return count;
   }
 
   private Root<E> buildFilteredQuery(final CriteriaQuery<?> countQuery) {

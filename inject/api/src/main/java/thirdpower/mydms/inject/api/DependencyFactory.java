@@ -8,8 +8,8 @@ public class DependencyFactory {
 	private static final class LazyHolder {
 		private static final DependencyFactory INSTANCE = new DependencyFactory();
 	}
-	
-	public static final <T> T getInstance(Class<T> clazz) {
+
+	public static <T> T getInstance(Class<T> clazz) {
 		return LazyHolder.INSTANCE.resolveInstance(clazz);
 	}
 

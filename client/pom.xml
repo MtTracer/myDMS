@@ -13,50 +13,53 @@
 
     <artifactId>mydms.client</artifactId>
     <name>mydms-client</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <properties>
-
-        <mainClass>thirdpower.mydms.client.MyDmsApp</mainClass>
+        <tornadofx.version>1.7.11</tornadofx.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>no.tornado</groupId>
-            <artifactId>tornadofx</artifactId>
-        </dependency>
+    <modules>
+        <module>app</module>
+        <module>category</module>
+        <module>document</module>
+        <module>rest</module>
+        <module>type</module>
+    </modules>
 
-        <dependency>
-            <groupId>thirdpower.mydms</groupId>
-            <artifactId>mydms.category.ui</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>thirdpower.mydms</groupId>
-            <artifactId>mydms.document.ui</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>thirdpower.mydms</groupId>
-            <artifactId>mydms.type.ui</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.client.rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.client.document</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.client.category</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>thirdpower.mydms</groupId>
+                <artifactId>mydms.client.type</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>${mainClass}</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+            <dependency>
+                <groupId>no.tornado</groupId>
+                <artifactId>tornadofx</artifactId>
+                <version>${tornadofx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.json</groupId>
+                <artifactId>javax.json-api</artifactId>
+                <version>1.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

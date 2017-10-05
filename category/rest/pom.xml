@@ -14,4 +14,19 @@
 	<name>category-rest</name>
 	<packaging>jar</packaging>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>thirdpower.mydms</groupId>
+            <artifactId>mydms.category.api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+    </dependencies>
 </project>
