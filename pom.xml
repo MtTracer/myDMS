@@ -215,7 +215,9 @@
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
                 <artifactId>mydms.document.runtime</artifactId>
+                <type>pom</type>
                 <version>${project.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
@@ -231,7 +233,9 @@
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
                 <artifactId>mydms.type.runtime</artifactId>
+                <type>pom</type>
                 <version>${project.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
@@ -258,7 +262,9 @@
             <dependency>
                 <groupId>thirdpower.mydms</groupId>
                 <artifactId>mydms.category.runtime</artifactId>
+                <type>pom</type>
                 <version>${project.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>thirdpower.mydms</groupId>

@@ -22,16 +22,19 @@
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.document.runtime</artifactId>
+			<type>pom</type>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.category.runtime</artifactId>
+			<type>pom</type>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
 			<artifactId>mydms.type.runtime</artifactId>
+			<type>pom</type>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -134,9 +137,6 @@
 			<version>1.2.3</version>
 			<scope>runtime</scope>
 		</dependency>
-
-
-
 
 	</dependencies>
 
