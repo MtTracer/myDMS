@@ -1,11 +1,11 @@
 package thirdpower.mydms.filestore.filesystem.pathstrategies.subfolderdistribution;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SubfolderDistributionStrategyTest {
 
@@ -17,10 +17,10 @@ public class SubfolderDistributionStrategyTest {
     final Path root = Files.createTempDirectory("SubfolderDistributionStrategyTest").resolve("datastore");
     
     final Path directoryPath1 = strategy.createPath(root, 999, "someFilename.pdf");
-    assertThat(directoryPath1).isEqualTo(root.resolve("gn_4\\ePnJ\\eIcm\\fogD\\E_fB\\kw\\999\\someFilename.pdf"));
+      assertThat(directoryPath1.normalize()).isEqualTo(root.resolve("gn_4/ePnJ/eIcm/fogD/E_fB/kw/999/someFilename.pdf").normalize());
 
     final Path directoryPath2 = strategy.createPath(root, 998, "someFilename.pdf");
-    assertThat(directoryPath2).isEqualTo(root.resolve("_GUr\\EpPj\\V08y\\uVDr\\MkWH\\UA\\998\\someFilename.pdf"));
+      assertThat(directoryPath2.normalize()).isEqualTo(root.resolve("_GUr/EpPj/V08y/uVDr/MkWH/UA/998/someFilename.pdf").normalize());
   }
 
 }
