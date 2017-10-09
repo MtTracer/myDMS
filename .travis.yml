@@ -6,7 +6,7 @@ cache:
   directories:
     - $HOME/.m2
 before_cache:
-  - rm -f $HOME/.m2/repository/thirdpower/mydms
+  - rm -rf $HOME/.m2/repository/thirdpower/mydms
 
 os:
   - linux
