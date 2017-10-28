@@ -3,7 +3,7 @@ package thirdpower.mydms.util;
 public class PagedQuery {
 
   public enum SortDirection {
-    ascending, descending;
+      ascending, descending
   }
 
   private Integer totalSize;

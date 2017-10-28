@@ -1,25 +1,23 @@
 package thirdpower.mydms.document.impl;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import javax.inject.Inject;
-
 import com.google.common.io.ByteSource;
 import com.google.inject.persist.Transactional;
-
 import thirdpower.mydms.document.api.Document;
 import thirdpower.mydms.document.api.DocumentFilter;
 import thirdpower.mydms.document.api.DocumentService;
 import thirdpower.mydms.document.api.DocumentServiceException;
-import thirdpower.mydms.document.persistence.DocumentRepository;
 import thirdpower.mydms.document.persistence.DocumentEntity;
+import thirdpower.mydms.document.persistence.DocumentRepository;
 import thirdpower.mydms.filestore.api.FileReference;
 import thirdpower.mydms.filestore.api.FileStoreException;
 import thirdpower.mydms.filestore.api.FileStoreService;
+
+import javax.inject.Inject;
+import java.util.Optional;
+import java.util.stream.Stream;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 class DefaultDocumentService implements DocumentService {
 
@@ -66,7 +64,7 @@ class DefaultDocumentService implements DocumentService {
       throw new DocumentServiceException("Could not delete document file.", e);
     }
 
-    documentDAO.remove(entity);
+      documentDAO.delete(entity);
     return true;
   }
 
@@ -87,7 +85,7 @@ class DefaultDocumentService implements DocumentService {
       throws DocumentServiceException {
     DocumentEntity entity = new DocumentEntity();
     entity.setFileName(document.getName());
-    entity = documentDAO.persist(entity);
+      entity = documentDAO.create(entity);
 
     try {
       filestoreService.save(entity.getId(), entity.getFileName(), contents);
@@ -103,7 +101,7 @@ class DefaultDocumentService implements DocumentService {
     DocumentEntity entity = documentDAO.findById(document.getId());
     checkArgument(null != entity, "Can't find document with id %s for update.", document.getId());
     entity.setFileName(document.getName());
-    entity = documentDAO.persist(entity);
+      entity = documentDAO.update(entity);
     return fromEntity(entity);
   }
 

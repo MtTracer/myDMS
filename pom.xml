@@ -15,6 +15,7 @@
 		<java.version>1.8</java.version>
         <kotlin.version>1.1.51</kotlin.version>
         <kotlin-lang.version>1.1</kotlin-lang.version>
+		<kotlintest.version>2.0.6</kotlintest.version>
 
         <servlet-api.version>4.0.0</servlet-api.version>
 		<guice.version>4.1.0</guice.version>
@@ -106,12 +107,7 @@
 				<artifactId>auto-service</artifactId>
 				<version>${auto-service.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.mockito</groupId>
-				<artifactId>mockito-core</artifactId>
-                <version>2.10.0</version>
-				<scope>test</scope>
-			</dependency>
+
 			<dependency>
 				<groupId>javax.json</groupId>
 				<artifactId>javax.json-api</artifactId>
@@ -305,10 +301,16 @@
 			</dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-test</artifactId>
+				<artifactId>kotlin-test-junit</artifactId>
                 <version>${kotlin.version}</version>
                 <scope>test</scope>
             </dependency>
+			<dependency>
+				<groupId>io.kotlintest</groupId>
+				<artifactId>kotlintest</artifactId>
+				<version>${kotlintest.version}</version>
+				<scope>test</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.jetbrains</groupId>
 				<artifactId>annotations</artifactId>
@@ -321,6 +323,18 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>2.7.11</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.nhaarman</groupId>
+				<artifactId>mockito-kotlin</artifactId>
+				<version>1.5.0</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

@@ -4,6 +4,7 @@ import thirdpower.mydms.category.api.Category
 import thirdpower.mydms.category.api.CategoryService
 import thirdpower.mydms.category.persistence.CategoryEntity
 import thirdpower.mydms.category.persistence.CategoryRepository
+import thirdpower.mydms.utils.Tree
 import thirdpower.mydms.utils.TreeNode
 import javax.inject.Inject
 
@@ -13,26 +14,28 @@ class DefaultCategoryService
 		private val repo : CategoryRepository 
 ) : CategoryService {
 
-    override fun getCategoryTree(): TreeNode<Category> =
-            fromEntity(repo.findTree())
+	override fun getCategoryTree(): Tree<Category> {
+		val root = repo.findRootsEager().firstOrNull()
+		val rootChildren = root?.children?.map(this::fromEntity)
+				?: emptyList()
+		return Tree(children = rootChildren)
+	}
 
-    override fun saveCategoryTree(categoryTree: TreeNode<Category>): TreeNode<Category> {
-        val dummyRoot = TreeNode(data = Category(id = null, name = "ROOT"), children = categoryTree.children)
-        val persistedRoot = repo.saveTree(toEntity(dummyRoot))
-        return fromEntity(persistedRoot)
+	override fun saveCategoryTree(categoryTree: Tree<Category>): Tree<Category> {
+		val childEntities = categoryTree.children.mapTo(mutableListOf(), this::toEntity)
+		val root = repo.findRootsLazy().firstOrNull()?.apply { children = childEntities }
+				?: CategoryEntity(name = "ROOT", children = childEntities)
+		val persistedRoot = repo.saveCategoryTree(root)
+		return Tree(children = persistedRoot.children.map(this::fromEntity))
     }
 
-    private fun fromEntity(entity: CategoryEntity?): TreeNode<Category> =
-            if (null == entity) {
-                TreeNode(data = Category(id = null, name = "ROOT"))
-            } else {
-                TreeNode(
-                        data = Category(
-                                id = entity.id,
-                                name = entity.name),
-                        children = entity.children.map(this::fromEntity)
-                )
-            }
+	private fun fromEntity(entity: CategoryEntity): TreeNode<Category> =
+			TreeNode(
+					data = Category(
+							id = entity.id,
+							name = entity.name),
+					children = entity.children.map(this::fromEntity)
+			)
 
     private fun toEntity(categoryNode: TreeNode<Category>): CategoryEntity =
             CategoryEntity(

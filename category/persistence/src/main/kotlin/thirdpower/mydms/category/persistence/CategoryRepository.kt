@@ -7,36 +7,42 @@ class CategoryRepository @Inject constructor(
         private val entityManager: EntityManager
 ) {
 
-    fun findTree(): CategoryEntity? {
+	fun findRootsEager(): List<CategoryEntity> {
         //query all to fill cache
         entityManager.createQuery("select c from CategoryEntity c left join fetch c.children").resultList
-        return findRoot()
+		return findRootsLazy()
     }
 
-    fun saveTree(treeRoot: CategoryEntity): CategoryEntity {
-        //use existing root or create new one with children from given treeRoot
-        val root = findRoot()?.apply {
-            children = treeRoot.children
-        } ?: CategoryEntity(id = null, name = "ROOT", children = treeRoot.children)
+	fun saveCategoryTree(categoryEntity: CategoryEntity): CategoryEntity {
+		entityManager.transaction.begin()
 
-        entityManager.transaction.begin()
-        entityManager.persist(root)
+		val persistedEntity = recursiveMerge(categoryEntity)
+
+		entityManager.persist(persistedEntity)
         entityManager.transaction.commit()
 
-        //FIXME necessary because first persist removes all children of no more existing categories even if they are now children in new tree under another category
-        entityManager.transaction.begin()
-        entityManager.persist(root)
-        entityManager.transaction.commit()
-
-        return root
+		return persistedEntity
     }
 
-    private fun findRoot(): CategoryEntity? {
+	private fun recursiveMerge(entity: CategoryEntity): CategoryEntity =
+			if (entity.id == null) {
+				//new entity must not be merged, but maybe children are already existent
+				entity.apply {
+					children = children.mapTo(mutableListOf()) { c ->
+						recursiveMerge(c)
+					}
+				}
+			} else {
+				//children are merged recursively by CascadeType.ALL in CategoryEntity
+				entityManager.merge(entity)
+			}
+
+	fun findRootsLazy(): List<CategoryEntity> {
         val cb = entityManager.criteriaBuilder
         val q = cb.createQuery(CategoryEntity::class.java)
 		val criteria = q.from(CategoryEntity::class.java)
         val select = q.select(criteria).where(cb.isNull(criteria.get<CategoryEntity>("parent")))
-        return entityManager.createQuery(select).resultList.firstOrNull()
+		return entityManager.createQuery(select).resultList
     }
 
 }

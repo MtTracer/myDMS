@@ -1,14 +1,13 @@
 package thirdpower.mydms.persistence.h2embedded;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.nio.file.Path;
-
-import org.eclipse.persistence.config.PersistenceUnitProperties;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.AbstractModule;
 import com.google.inject.persist.jpa.JpaPersistModule;
+import org.eclipse.persistence.config.PersistenceUnitProperties;
+
+import java.nio.file.Path;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class H2EmbeddedModule extends AbstractModule {
 
@@ -25,7 +24,7 @@ public class H2EmbeddedModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    final ImmutableMap<Object, Object> jpaProperties = ImmutableMap.<Object, Object>builder()
+      final ImmutableMap<Object, Object> jpaProperties = ImmutableMap.builder()
       .put(PersistenceUnitProperties.JDBC_URL.intern(), "jdbc:h2:" + dbUrlSuffix)
       .build();
     install(new JpaPersistModule("h2embedded").properties(jpaProperties));

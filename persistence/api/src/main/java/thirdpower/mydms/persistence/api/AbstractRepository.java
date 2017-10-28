@@ -24,7 +24,7 @@ public abstract class AbstractRepository<E, K> {
 
   private final TypeToken<E> entityTypeToken = new TypeToken<E>(getClass()) {};
 
-  public E persist(final E entity) {
+    public E create(final E entity) {
     entityManager.getTransaction()
       .begin();
     entityManager.persist(entity);
@@ -33,7 +33,16 @@ public abstract class AbstractRepository<E, K> {
     return entity;
   }
 
-  public void remove(E entity) {
+    public E update(E entity) {
+        entityManager.getTransaction()
+                .begin();
+        entity = entityManager.merge(entity);
+        entityManager.getTransaction()
+                .commit();
+        return entity;
+    }
+
+    public void delete(E entity) {
     entityManager.getTransaction()
       .begin();
     entity = entityManager.merge(entity);
@@ -41,6 +50,13 @@ public abstract class AbstractRepository<E, K> {
     entityManager.getTransaction()
       .commit();
   }
+
+    public void deleteById(K id) {
+        E entity = findById(id);
+        if (null != entity) {
+            delete(entity);
+        }
+    }
 
   public E findById(final K id) {
     return entityManager.find(getEntityClass(), id);

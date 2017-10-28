@@ -1,8 +1,8 @@
 package thirdpower.mydms.filestore.api;
 
-import java.util.Optional;
-
 import com.google.common.io.ByteSource;
+
+import java.util.Optional;
 
 public interface FileStoreService {
 
@@ -15,7 +15,7 @@ public interface FileStoreService {
    * @return if existing a {@link FileReference} pointing to the requested file wrapped in an
    *         {@link Optional}, if not found an {@link Optional#empty()}
    */
-  public Optional<FileReference> read(long fileReferenceId, String filename);
+  Optional<FileReference> read(long fileReferenceId, String filename);
 
   /**
    * Writes the given contents to the file referenced by the given id and filename. Existing files
@@ -29,7 +29,7 @@ public interface FileStoreService {
    * @throws FileStoreException if there was an error while writing the file or if the given
    *         contents point to the same file that should be written
    */
-  public FileReference save(long fileReferenceId, String filename, ByteSource contents)
+  FileReference save(long fileReferenceId, String filename, ByteSource contents)
       throws FileStoreException;
 
   /**
@@ -39,5 +39,5 @@ public interface FileStoreService {
    * @param filename name of the file
    * @throws FileStoreException error while removing the file
    */
-  public void delete(long fileReferenceId, String filename) throws FileStoreException;
+  void delete(long fileReferenceId, String filename) throws FileStoreException;
 }

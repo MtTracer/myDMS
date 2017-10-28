@@ -1,8 +1,8 @@
 package thirdpower.mydms.document.api;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public final class DocumentFilter {
 
@@ -30,8 +30,8 @@ public final class DocumentFilter {
     return nameFilterMode;
   }
 
-  
-  public static enum NameFilterMode {
+
+    public enum NameFilterMode {
     EQUALS, CONTAINS, REGEX
   }
 

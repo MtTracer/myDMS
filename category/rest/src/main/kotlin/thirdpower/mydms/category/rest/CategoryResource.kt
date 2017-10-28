@@ -2,6 +2,7 @@ package thirdpower.mydms.category.rest
 
 import thirdpower.mydms.category.api.Category
 import thirdpower.mydms.category.api.CategoryService
+import thirdpower.mydms.utils.Tree
 import thirdpower.mydms.utils.TreeNode
 import javax.inject.Inject
 import javax.ws.rs.*
@@ -17,15 +18,21 @@ class CategoryResource
     @Path("tree")
     fun getCategoryTree(): CategoryPojo {
         val categoryRoot = service.getCategoryTree()
-        return toPojo(categoryRoot)
+        return CategoryPojo(
+                id = null,
+                name = "root",
+                children = categoryRoot.children.map(this::toPojo))
     }
 
     @POST
     @Path("tree")
     fun saveCategoryTree(categoryRootPojo: CategoryPojo): CategoryPojo {
-        val categoryRoot = fromPojo(categoryRootPojo)
-        val savedCategoryTree = service.saveCategoryTree(categoryRoot)
-        return toPojo(savedCategoryTree)
+        val tree = Tree(children = categoryRootPojo.children.map(this::fromPojo))
+        val savedCategoryTree = service.saveCategoryTree(tree)
+        return CategoryPojo(
+                id = null,
+                name = "root",
+                children = savedCategoryTree.children.map(this::toPojo))
     }
 
     private fun fromPojo(pojo: CategoryPojo): TreeNode<Category> {
