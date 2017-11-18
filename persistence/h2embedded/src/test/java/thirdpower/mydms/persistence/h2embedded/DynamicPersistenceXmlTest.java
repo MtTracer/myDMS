@@ -1,20 +1,18 @@
 package thirdpower.mydms.persistence.h2embedded;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.google.common.collect.ImmutableList;
+import com.google.common.io.Resources;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import thirdpower.mydms.persistence.api.PersistenceClassProvider;
+import thirdpower.mydms.persistence.api.PersistenceClassRegistration;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.io.Resources;
-
-import thirdpower.mydms.persistence.api.PersistenceClassProvider;
-import thirdpower.mydms.persistence.api.PersistenceClassRegistration;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DynamicPersistenceXmlTest {
 
@@ -55,7 +53,7 @@ public class DynamicPersistenceXmlTest {
     final String expectedContents =
         Resources.toString(expectedPersistenceXml, StandardCharsets.UTF_8);
 
-    assertThat(contents).isEqualTo(expectedContents);
+      assertThat(contents).isXmlEqualTo(expectedContents);
   }
 
 }

@@ -30,7 +30,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-stdlib</artifactId>
+            <artifactId>kotlin-stdlib-jre8</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>thirdpower.mydms</groupId>
@@ -44,10 +44,6 @@
         <dependency>
             <groupId>thirdpower.mydms</groupId>
             <artifactId>mydms.util</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
         </dependency>
 		<dependency>
 			<groupId>io.kotlintest</groupId>

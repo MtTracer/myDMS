@@ -1,6 +1,7 @@
 package thirdpower.mydms.persistence.h2embedded;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.io.Resources;
+import thirdpower.mydms.persistence.api.PersistenceClassProvider;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -10,21 +11,20 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
+import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
-import com.floreysoft.jmte.Engine;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.io.Resources;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import thirdpower.mydms.persistence.api.PersistenceClassProvider;
-
-public class DynamicPersistenceXml {
+class DynamicPersistenceXml {
 
 
-  private static final String DYNAMIC_CLASSPATH_NAME = "dynamicPersistenceClasspath";
-  private static final String PERSISTENCE_XML_TEMPLATE = "persistence.xml.template";
-  private final Iterable<PersistenceClassProvider> persistenceClassProviders;
+    private static final String DYNAMIC_CLASSPATH_NAME = "dynamicPersistenceClasspath";
+    private static final String PERSISTENCE_XML_TEMPLATE = "persistence.xml.template";
+    private static final String PERSISTENCE_CLASSES_PLACEHOLDER = "${persistenceClasses}";
+    private static final String PERSISTENCE_CLASSES_PREFIX = "<class>";
+    private static final String PERSISTENCE_CLASSES_SUFFIX = "</class>";
+    private final Iterable<PersistenceClassProvider> persistenceClassProviders;
 
   DynamicPersistenceXml(final Iterable<PersistenceClassProvider> persistenceClassProviders) {
     this.persistenceClassProviders = checkNotNull(persistenceClassProviders);
@@ -52,11 +52,12 @@ public class DynamicPersistenceXml {
   }
 
   private String buildPersistenceXml(final List<String> persistenceClassNames) throws IOException {
+      StringJoiner joiner = new StringJoiner(PERSISTENCE_CLASSES_SUFFIX + "\n\t\t" + PERSISTENCE_CLASSES_PREFIX, PERSISTENCE_CLASSES_PREFIX, PERSISTENCE_CLASSES_SUFFIX);
+      persistenceClassNames.forEach(joiner::add);
+
     final URL templateUrl = Resources.getResource(getClass(), PERSISTENCE_XML_TEMPLATE);
     final String template = Resources.toString(templateUrl, StandardCharsets.UTF_8);
-    final Map<String, Object> model = ImmutableMap.of("persistenceClasses", persistenceClassNames);
-    return Engine.createEngine()
-      .transform(template, model);
+      return template.replace(PERSISTENCE_CLASSES_PLACEHOLDER, joiner.toString());
   }
 
   private List<String> findPersistenceClassNames() {

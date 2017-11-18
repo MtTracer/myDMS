@@ -62,16 +62,6 @@
 			<artifactId>mydms.persistence.api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.floreysoft</groupId>
-			<artifactId>jmte</artifactId>
-		</dependency>
-		<dependency>
-			<!-- replace excluded asm from jmte -->
-			<groupId>org.ow2.asm</groupId>
-			<artifactId>asm</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
 			<scope>test</scope>
