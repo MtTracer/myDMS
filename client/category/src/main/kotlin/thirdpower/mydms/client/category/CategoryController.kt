@@ -6,7 +6,7 @@ import tornadofx.toModel
 
 class CategoryController : Controller() {
 
-    val api: MyDmsRestApi by inject()
+    private val api: MyDmsRestApi by inject()
 
     fun loadCategoryTree(): Category =
             api.get("categories/tree").one().toModel()
